@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Valentine Surprise</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 80px;
+      background: #e0f7ff; /* soft blue background */
+      overflow: hidden;
+      position: relative;
+    }
+    h1 {
+      color: #0066cc;
+      font-size: 48px;
+    }
+    h2 {
+      color: #004080;
+      font-size: 22px;
+      margin-bottom: 40px;
+    }
+    input {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #3399ff;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      margin-left: 5px;
+      cursor: pointer;
+      background-color: #3399ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #2673cc;
+    }
+    #result {
+      margin-top: 40px;
+      font-size: 22px;
+      color: #003366;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+    .heart {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background-color: #3399ff;
+      transform: rotate(-45deg);
+      animation: float 4s linear infinite;
+      z-index: 0;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background-color: #3399ff;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: 10px; top: 0; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+      100% { transform: translateY(-600px) rotate(-45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Valentine Surprise 💖</h1>
+<h2>Type "my love" below and see my special message just for you 💌</h2>
+
+<input id="search" placeholder="Type something..." />
+<button onclick="showMessage()">Search</button>
+
+<div id="result"></div>
+
+<script>
+function showMessage() {
+  let text = document.getElementById("search").value.toLowerCase();
+  
+  if (text.includes("my love")) {
+    document.getElementById("result").innerHTML =
+      "💖 My love 💖<br><br>" +
+      "I really appreciate you being in my life. You are the best thing that has ever happened to me — " +
+      "the girl I wished for, dreamed of, and somehow got lucky enough to have. " +
+      "I love you more than you know.<br><br>" +
+      "Every moment with you is a treasure. " +
+      "Your smile lights up my darkest days, and your laugh is my favorite sound. " +
+      "I promise to always be there for you, to support you, and to love you endlessly.<br><br>" +
+      "Happy Valentine’s Day ❤️";
+
+    createHearts(30); // create 30 floating hearts
+  } else {
+    document.getElementById("result").innerHTML =
+      "No results found… try typing something special 💕";
+  }
+}
+
+function createHearts(count) {
+  for (let i = 0; i < count; i++) {
+    let heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+    heart.style.width = heart.style.height = (10 + Math.random() * 20) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+  }
+}
+</script>
+
+</body>
+</html>
