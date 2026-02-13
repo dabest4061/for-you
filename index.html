@@ -10,7 +10,7 @@
       background: #e0f7ff; /* soft blue background */
       overflow: hidden;
       position: relative;
-      padding: 0 10px; /* side padding for mobile */
+      padding: 0 10px;
     }
 
     h1 {
@@ -60,29 +60,14 @@
       position: relative;
       z-index: 1;
       word-wrap: break-word;
+      min-height: 200px;
     }
 
-    /* Mobile-specific adjustments */
     @media screen and (max-width: 480px) {
-      h1 {
-        font-size: 36px;
-      }
-
-      h2 {
-        font-size: 18px;
-        margin-bottom: 30px;
-      }
-
-      input, button {
-        width: 100%;
-        margin: 5px 0;
-        font-size: 16px;
-      }
-
-      #result {
-        font-size: 18px;
-        margin-top: 30px;
-      }
+      h1 { font-size: 36px; }
+      h2 { font-size: 18px; margin-bottom: 30px; }
+      input, button { width: 100%; margin: 5px 0; font-size: 16px; }
+      #result { font-size: 18px; margin-top: 30px; }
     }
   </style>
 </head>
@@ -99,21 +84,36 @@
   <script>
     function showMessage() {
       let text = document.getElementById("search").value.toLowerCase();
-      
+      const result = document.getElementById("result");
+      result.innerHTML = ""; // clear previous message
+
       if (text.includes("my love")) {
-        document.getElementById("result").innerHTML =
-          "💖 My love 💖<br><br>" +
+        const message =
+          "💖 My love 💖\n\n" +
           "I really appreciate you being in my life. You are the best thing that has ever happened to me — " +
-          "the girl I wished for, dreamed of, and somehow got lucky enough to have. " +
-          "I love you more than you know.<br><br>" +
+          "the girl I wished for, dreamed of, and somehow got lucky enough to have. I love you more than you know.\n\n" +
           "Every moment with you is a treasure. " +
           "Your smile lights up my darkest days, and your laugh is my favorite sound. " +
-          "I promise to always be there for you, to support you, and to love you endlessly.<br><br>" +
-          "Happy Valentine’s Day ❤️<br><br>" +
-          "<strong>From Mark</strong>";
+          "I promise to always be there for you, to support you, and to love you endlessly.\n\n" +
+          "Happy Valentine’s Day ❤️\n\n" +
+          "From Mark";
+
+        let i = 0;
+        function typeWriter() {
+          if (i < message.length) {
+            if (message.charAt(i) === "\n") {
+              result.innerHTML += "<br>";
+            } else {
+              result.innerHTML += message.charAt(i);
+            }
+            i++;
+            setTimeout(typeWriter, 40); // typing speed
+          }
+        }
+
+        typeWriter();
       } else {
-        document.getElementById("result").innerHTML =
-          "No results found… try typing something special 💕";
+        result.innerHTML = "No results found… try typing something special 💕";
       }
     }
   </script>
