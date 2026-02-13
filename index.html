@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Valentine Surprise</title>
+  <title>Valentine Message</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       margin-top: 50px;
-      background: #e0f7ff; /* soft blue */
+      background: #e0f7ff; /* soft blue background */
       overflow: hidden;
       position: relative;
       padding: 0 10px;
     }
 
-    /* blur overlay */
+    /* overlay with countdown */
     #overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(224, 247, 255, 0.9);
+      background: rgba(224, 247, 255, 0.95);
       backdrop-filter: blur(8px);
       z-index: 10;
       display: flex;
@@ -94,11 +94,11 @@
 
   <!-- Overlay with timer -->
   <div id="overlay">
-    Surprise unlocks in <span id="timer">00:00:00</span>
+    Wait… not yet 💙 <span id="timer">00:00:00</span>
   </div>
 
-  <h1>Valentine Surprise 💖</h1>
-  <h2>Type "my love" below and see my special message just for you 💌</h2>
+  <h1>For My Love 💖</h1>
+  <h2>Type "my love" below and read what’s in my heart 💌</h2>
 
   <input id="search" placeholder="Type something..." />
   <button onclick="showMessage()">Search</button>
@@ -106,7 +106,7 @@
   <div id="result"></div>
 
   <script>
-    // Set the countdown time (e.g., Feb 14, 2026 00:00:00)
+    // Set countdown date (example: Feb 14, 2026 00:00:00)
     const countdownDate = new Date("Feb 14, 2026 00:00:00").getTime();
     const overlay = document.getElementById("overlay");
     const timerEl = document.getElementById("timer");
@@ -117,11 +117,12 @@
 
       if (distance <= 0) {
         clearInterval(timerInterval);
-        overlay.style.display = "none"; // unblur the page
+        overlay.style.display = "none"; // unblur page
       } else {
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000*60*60));
+        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
         const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
         const seconds = Math.floor((distance % (1000*60)) / 1000);
+
         timerEl.textContent = 
           (hours < 10 ? "0"+hours : hours) + ":" +
           (minutes < 10 ? "0"+minutes : minutes) + ":" +
@@ -129,11 +130,11 @@
       }
     }, 1000);
 
-    // Typing animation function
+    // Typing animation for your Valentine message
     function showMessage() {
       let text = document.getElementById("search").value.toLowerCase();
       const result = document.getElementById("result");
-      result.innerHTML = ""; // clear previous message
+      result.innerHTML = "";
 
       if (text.includes("my love")) {
         const message =
@@ -168,3 +169,4 @@
 
 </body>
 </html>
+
